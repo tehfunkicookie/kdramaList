@@ -1,8 +1,8 @@
 .PHONY: clean All
 
 All:
-	@echo "----------Building project:[ koreanDrama - Debug ]----------"
-	@cd "koreanDrama" && "$(MAKE)" -f  "koreanDrama.mk"
+	@echo "----------Building project:[ VerticalJump - Debug ]----------"
+	@cd "VerticalJump" && "$(MAKE)" -f  "VerticalJump.mk"
 clean:
-	@echo "----------Cleaning project:[ koreanDrama - Debug ]----------"
-	@cd "koreanDrama" && "$(MAKE)" -f  "koreanDrama.mk" clean
+	@echo "----------Cleaning project:[ VerticalJump - Debug ]----------"
+	@cd "VerticalJump" && "$(MAKE)" -f  "VerticalJump.mk" clean

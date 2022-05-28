@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Jerry Mar
-Date                   :=23/05/2022
+Date                   :=27/05/2022
 CodeLitePath           :="C:/Program Files/CodeLite"
 LinkerName             :="C:/Program Files/mingw-w64/mingw64/bin/g++.exe"
 SharedObjectLinkerName :="C:/Program Files/mingw-w64/mingw64/bin/g++.exe" -shared -fPIC
@@ -62,7 +62,7 @@ AS       := "C:/Program Files/mingw-w64/mingw64/bin/as.exe"
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/kdrama.cpp$(ObjectSuffix) 
 
 
 
@@ -98,6 +98,12 @@ $(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp
 	$(CXX) $(IncludePCH) $(SourceSwitch) "D:/2022_Cpp_Training/koreanDramaProject/koreanDramaProject/koreanDrama/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.cpp$(PreprocessSuffix): main.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.cpp$(PreprocessSuffix) main.cpp
+
+$(IntermediateDirectory)/kdrama.cpp$(ObjectSuffix): kdrama.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/kdrama.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/kdrama.cpp$(DependSuffix) -MM kdrama.cpp
+	$(CXX) $(IncludePCH) $(SourceSwitch) "D:/2022_Cpp_Training/koreanDramaProject/koreanDramaProject/koreanDrama/kdrama.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/kdrama.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/kdrama.cpp$(PreprocessSuffix): kdrama.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/kdrama.cpp$(PreprocessSuffix) kdrama.cpp
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
