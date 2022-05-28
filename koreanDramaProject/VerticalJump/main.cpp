@@ -1,17 +1,90 @@
 #include <iostream>
 #include <vector>
-#include <array>
 #include <string>
 #include <iomanip>
-#include <queue>
 #include <cmath>
 
 #define GRAVITY 9.81
+// units of gravity are m/s^2
 
 template <typename T>
 T potentialEnergy(T height, T mass){
     // remember height has to be in meters and mass has to be in kg
     return (mass*GRAVITY*height);
+}
+
+// function declarations
+void display_menu();
+double verticalToSquat(double height);
+double squatToVertical(double weight);
+double poundToKg(double pound);
+double kgToPound(double kg);
+double inchesToMeters(double inches);
+double metersToInches(double meters);
+double squat(double PE, double height);
+
+int main(){
+    
+    std::cout << "This small program is an approximation to how much you need squat in order to achieve a certain standing vertical jump\n" << std::endl;
+    std::cout << "The only equation used for this program is the potential energy to reach a certain vertical = potential energy needed to squat a certain weight. So the equation looks like: m1*g*h1 = m2*g*h2 or just m1*h1 = m2*h2 where:" << std::endl;
+    std::cout << std::endl;
+    std::cout << "m1 = mass of yourself - this is the mass that you're trying to bring to a certain height" << std::endl;
+    std::cout << "h1 = vertical jump distance" << std::endl;
+    std::cout << "m2 = squat weight" << std::endl;
+    std::cout << "h2 = distance travelled of squat " << std::endl;
+    std::cout << std::endl;
+    
+    std::cout << "Please read the following assumptions / user info needed: \n" << std::endl;
+    std::cout << "1. User must enter in mass in lbs. The program will automatically convert the lbs to kg." << std::endl;
+    std::cout << "2. User must enter in distance in inches. The program will automatically convert the inches to meters" << std::endl;
+    std::cout << "3. The first assumption here is that the kinetic energy (KE) for each situation is the same so only PE effects are evaluted. " << std::endl;
+    std::cout << "4. The second assumption is that the weight will travel around 17 inches when you squat up and down. That's about the length of your upper leg.\n" << std::endl; 
+    
+    std::cout << "If you agree with the user input requirements and assumptions, please type yes to continue to program menu." << std::endl;
+    std::string user_agreement;
+    std::getline(std::cin, user_agreement);
+    
+    if (user_agreement != "yes") {
+        return 0;
+    }
+    
+    std::cout << std::endl;
+    display_menu();
+    int choice;
+    
+    std::cin >> choice;
+    
+    while (choice !=3){
+        if (choice==1){
+            // enter in function for vertical jump based on input of squat weight
+        } else { // choice==2
+            // enter in function for squat weight based on vertical jump
+            
+        }
+        
+        display_menu();
+    }
+    
+    
+    
+    
+//    std::cout << potentialEnergy(0.762,72.5748) << " joules" << std::endl;
+//    std::cout << "Let's say when I squat, the weights travel a total of 17 inches or 0.4318 meters" << std::endl;
+//    std::cout << "The amount of mass I have to squat such that the energy required is the same as the required energy to jump 30 inches high is: " << kgToPound(squat(potentialEnergy(inchesToMeters(30.0),poundToKg(160.0)),inchesToMeters(17))) << " lbs" <<  std::endl;
+    
+    return 0;
+}
+
+void display_menu(){
+    std::cout << "Please select from the following: " << std::endl;
+    std::cout << "1. Determine vertical jump height required from squat weight" << std::endl;
+    std::cout << "2. Determine squat weight required for vertical jump height" << std::endl;
+    std::cout << "3. QUIT" << std::endl;
+}
+
+double squatToVertical(double weight){
+    // determine potential energy required of squat based on weight
+    
 }
 
 double poundToKg(double pound){
@@ -33,16 +106,6 @@ double metersToInches(double meters){
 double squat(double PE, double height){
     return (PE / (GRAVITY*height));
 }
-
-int main(){
-    
-    std::cout << potentialEnergy(0.762,72.5748) << " joules" << std::endl;
-    std::cout << "Let's say when I squat, the weights travel a total of 17 inches or 0.4318 meters" << std::endl;
-    std::cout << "The amount of mass I have to squat such that the energy required is the same as the required energy to jump 30 inches high is: " << kgToPound(squat(potentialEnergy(inchesToMeters(30.0),poundToKg(160.0)),inchesToMeters(17))) << " lbs" <<  std::endl;
-    
-    return 0;
-}
-
 // math logic:
 // to jump 30" from the ground...and i'm 160lb...which converted to kg is about 72.5748kg
 // 30 inches to meters is 0.762 meters
