@@ -15,8 +15,8 @@ T potentialEnergy(T height, T mass){
 
 // function declarations
 void display_menu();
-double verticalToSquat(double height);
-double squatToVertical(double weight);
+double verticalToSquat(double height, double user_weight);
+double squatToVertical(double squat_weight, double user_weight);
 double poundToKg(double pound);
 double kgToPound(double kg);
 double inchesToMeters(double inches);
@@ -57,20 +57,42 @@ int main(){
     while (choice !=3){
         if (choice==1){
             // enter in function for vertical jump based on input of squat weight
+            double user_squat_weight;
+            double user_weight;
+            
+            std::cout << "Please enter in how much you squat or want to squat in lbs: ";
+            std::cin >> user_squat_weight;
+            
+            std::cout << "Please enter in how much you weigh in lbs: ";
+            std::cin >> user_weight;
+            
+            double desired_vertical = squatToVertical(user_squat_weight,user_weight);
+            
+            std::cout << "If you squat " << user_squat_weight << " lbs, you can have a standing vertical jump of " << desired_vertical << " inches.\n" << std::endl;
+            
         } else { // choice==2
             // enter in function for squat weight based on vertical jump
+            double user_vertical;
+            double user_weight;
             
+            std::cout << "Please enter in how much you can jump from a standing/neutral position: ";
+            std::cin >> user_vertical;
+            
+            std::cout << "Please enter in how much you weigh in lbs: ";
+            std::cin >> user_weight; 
+            
+            double desired_squat = verticalToSquat(user_vertical,user_weight);
+            
+            std::cout << "If you can or want to jump " << user_vertical << " inches, you have to squat at least " << desired_squat << " lbs.\n" << std::endl;          
+
         }
-        
+             
         display_menu();
+        std::cin >> choice;
     }
     
     
-    
-    
-//    std::cout << potentialEnergy(0.762,72.5748) << " joules" << std::endl;
-//    std::cout << "Let's say when I squat, the weights travel a total of 17 inches or 0.4318 meters" << std::endl;
-//    std::cout << "The amount of mass I have to squat such that the energy required is the same as the required energy to jump 30 inches high is: " << kgToPound(squat(potentialEnergy(inchesToMeters(30.0),poundToKg(160.0)),inchesToMeters(17))) << " lbs" <<  std::endl;
+    std::cout << "Thank you for using my program. Goodbye!" << std::endl;
     
     return 0;
 }
@@ -82,9 +104,27 @@ void display_menu(){
     std::cout << "3. QUIT" << std::endl;
 }
 
-double squatToVertical(double weight){
+double squatToVertical(double squat_weight, double user_weight){
     // determine potential energy required of squat based on weight
+    double distanceConverted = inchesToMeters(17);
+    double weightConverted = poundToKg(squat_weight);
+    double userWeightConverted = poundToKg(user_weight);
+    double PE_from_squat = potentialEnergy(distanceConverted,weightConverted);
     
+    double vertical = PE_from_squat / (GRAVITY*userWeightConverted);
+    return metersToInches(vertical);
+}
+
+double verticalToSquat(double height, double user_weight){
+    // determine potential energy required of squat based on weight
+    double distanceConverted = inchesToMeters(17);
+    double verticalConverted = inchesToMeters(height);
+    double userWeightConverted = poundToKg(user_weight);
+    double PE_from_vertical = potentialEnergy(verticalConverted,userWeightConverted);
+    
+    double squatWeight =  PE_from_vertical / (GRAVITY*distanceConverted);
+    
+    return kgToPound(squatWeight);
 }
 
 double poundToKg(double pound){
@@ -103,12 +143,12 @@ double metersToInches(double meters){
     return meters*39.3701;
 }
 
-double squat(double PE, double height){
-    return (PE / (GRAVITY*height));
-}
 // math logic:
 // to jump 30" from the ground...and i'm 160lb...which converted to kg is about 72.5748kg
 // 30 inches to meters is 0.762 meters
 // E = mgh; 
 // 1lb = 0.453592 kg
 // 1 inch is 0.0254 m
+
+// m1gh1 = m2gh2
+// h1 (vertical height)  = (PE_from_squat) / m1*g
