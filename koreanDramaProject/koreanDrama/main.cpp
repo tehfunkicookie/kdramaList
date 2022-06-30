@@ -25,66 +25,93 @@ int main (){
     std::cin >> choice;
     std::cin.ignore();
     
-    while (choice!=6){
+    while (choice!=7){
         switch(choice){
             case 1: 
             {
-                std::string name, status;
-                double rating;
-                
-                std::cout << "Name of korean drama: ";
-                std::getline(std::cin, name);
-                
-                std::cout << "Status (Complete/Watching): ";
-                std::getline(std::cin, status);
-                
-                std::cout << "Rating (1-10): ";
-                std::cin >> rating;
-                
-                kdrama input = kdrama(name,status,rating);
-                kdrama::add_kdrama(input);
-                
+                kdrama::create_kdrama();
+                break;
+            }    
+            
+            case 2: //Rate a korean drama or change a rating
+            {
+                int num_check = kdrama::find_kdrama();
+                std::cout << num_check << std::endl;
+                if(num_check){
+//                    kdrama::update_rating();
+                    // use the index returned by find_kdrama and find it in the vector 
+                    // then call update_rating function 
+                    // i cannot call a non-static method from a static method
+                    // since i'm updating a korean drama rating, it has to be done from the object of the korean drama
+                    // i'm gonna have to write a function to return the kdrama i'm looking for
+                    // then store that return into a reference here in the main
+                    kdrama& desired = kdrama::get_kdrama(num_check);
+                    desired.setRating();
+                }
+                break;
+            }    
+            
+            case 3:
+            {
+                int num_check = kdrama::find_kdrama();
+                std::cout << num_check << std::endl;
+                if(num_check){
+//                    kdrama::update_rating();
+                    // use the index returned by find_kdrama and find it in the vector 
+                    // then call update_rating function 
+                    // i cannot call a non-static method from a static method
+                    // since i'm updating a korean drama rating, it has to be done from the object of the korean drama
+                    // i'm gonna have to write a function to return the kdrama i'm looking for
+                    // then store that return into a reference here in the main
+                    kdrama& desired = kdrama::get_kdrama(num_check);
+                    desired.setStatus();
+                }
                 break;
             }
-            
-            case 2:
-                std::string user_kdrama_name;
-                std::cout << "Enter in korean drama that you want to update/change the rating of: ";
-                std::getline(std::cin,user_kdrama_name);
-                
-                
-                
-                
-                break;
-                
-            case 3:
-                
-                break;
                 
             case 4:
+            {
                 kdrama::print_list();
                 std::cout << std::endl;
+            }
                 break;
+            
                 
             case 5:
+            {
+                kdrama::export_list();
+                std::cout << std::endl;
+            }
                 break;
+            
+            case 6: {
+                // enter in method here
+                std::cout << std::endl;
+                break;
+            }
                 
             default:
+            {
                 std::cout << "invalid selection. Please make another choice" << std::endl;
-                break;
+                
+            }
+            break;
         }
-        
+    
+        std::cout << std::endl;
         std::cout << "Do you want to return back to main menu (Y/N): ?" <<  std::endl;
         char c;
         std::cin >> c;
         
-        if (c=='Y'){
+        if (c=='Y' || c =='y'){
             display_menu();
-            std::cin >> choice;           
+            std::cin >> choice;     
+            std::cin.ignore();
+            std::cout << std::endl;
         } else{
             break;
         }
-}
+    }
     
     return 0;
 }
@@ -96,6 +123,7 @@ void display_menu(){
     std::cout << "3. Update status of korean drama" << std::endl; // finished, still watching or stopping/giving up, updating episode
     std::cout << "4. Print current korean drama list" << std::endl;
     std::cout << "5. Export current korean drama list out to .txt file" << std::endl;
-    std::cout << "6. QUIT" << std::endl;
+    std::cout << "6. Read korean drama list text file" << std::endl;
+    std::cout << "7. QUIT" << std::endl;
     std::cout << std::endl;
 }

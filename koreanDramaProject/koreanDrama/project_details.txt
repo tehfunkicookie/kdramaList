@@ -1,0 +1,24 @@
+the purpose of this program is to record all the korean dramas a user has watched. 
+They can also include the following information:
+
+1. personal rank of the korean dramas (scale 1-10)
+2. status of the korean dramas (completed or still watching)
+3. year that the korean drama was made
+
+i'll write the korean drama as a class with the following attributes:
+
+string name
+int year_produced 
+string status 
+int rank 
+int episode - if the status is watching, then can enter in the episode that is being watched 
+
+methods:
+- all getters/setters
+- print information to text file
+- read information from a text file
+- update korean drama status 
+- enter in a korean drama 
+- print out current korean drama list information
+
+

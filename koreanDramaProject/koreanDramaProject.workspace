@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="koreanDramaProject" Database="" Version="10000">
-  <Project Name="koreanDrama" Path="koreanDrama/koreanDrama.project" Active="No"/>
-  <Project Name="scratch" Path="scratch/scratch.project" Active="No"/>
-  <Project Name="VerticalJump" Path="VerticalJump/VerticalJump.project" Active="Yes"/>
+  <Project Name="koreanDrama" Path="koreanDrama/koreanDrama.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
       <Project Name="koreanDrama" ConfigName="Debug"/>
-      <Project Name="scratch" ConfigName="Debug"/>
       <Project Name="VerticalJump" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Environment/>
       <Project Name="koreanDrama" ConfigName="Release"/>
-      <Project Name="scratch" ConfigName="Release"/>
       <Project Name="VerticalJump" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
