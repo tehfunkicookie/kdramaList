@@ -25,7 +25,7 @@ int main (){
     std::cin >> choice;
     std::cin.ignore();
     
-    while (choice!=7){
+    while (choice!=7 && !isalpha(choice) ){
         switch(choice){
             case 1: 
             {
@@ -86,22 +86,22 @@ int main (){
             
             case 6: {
                 // enter in method here
+                kdrama::import_kdrama_list();
                 std::cout << std::endl;
                 break;
             }
                 
             default:
-            {
-                std::cout << "invalid selection. Please make another choice" << std::endl;
-                
-            }
-            break;
+            
+                std::cout << "invalid selection." << std::endl;
+                break;
         }
     
         std::cout << std::endl;
         std::cout << "Do you want to return back to main menu (Y/N): ?" <<  std::endl;
         char c;
         std::cin >> c;
+        std::cin.ignore();
         
         if (c=='Y' || c =='y'){
             display_menu();

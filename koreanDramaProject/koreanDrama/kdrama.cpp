@@ -63,6 +63,9 @@ void kdrama::create_kdrama(){
             if (user_status == "Watching"){
                 std::cout << "Enter current episode you are watching: ";
                 std::cin >> user_episode;
+            } else{
+                user_episode = 16;
+                // standard kdramas are 16 episode long. 
             }
                 
             std::cout << "Rating (1-10): ";
@@ -81,10 +84,10 @@ void kdrama::print_list(){
     }
     
     std::cout << "Here is your list of korean dramas: " << std::endl;
-    std::cout << "Korean Drama Title " << std::setw(50) << "Status (Complete/Watching)" << std::setw(50)<< "Rating (1-10)" << std::endl; 
-    std::cout << "________________________________________________________________________________________________________________________" << std::endl;
+    std::cout << std::left << std::setw(30) << "Korean Drama Title " << std::left << std::setw(40) << "Status (Complete/Watching)" << std::left << std::setw(20)<< "Episode" << std::left << std::setw(20) << "Rating (1-10)" << std::endl; 
+    std::cout << "______________________________________________________________________________________________________________________________" << std::endl;
     for (int i=0;i<watchlist.size();i++){
-        std::cout << std::left << std::setw(60) << watchlist[i].name << std::left << std::setw(60) << watchlist[i].status << std::left << std::setw(10) << watchlist[i].rating << std::endl;
+        std::cout << std::left << std::setw(30) << watchlist[i].name << std::left << std::setw(40) << watchlist[i].status << std::left << std::setw(20) << watchlist[i].episode << std::left << std::setw(10) << watchlist[i].rating << std::endl;
     }
 }
 
@@ -95,17 +98,36 @@ void kdrama::export_list(){
     }
     
     std::cout << "Outputting current kdrama list to text file..." << std::endl;
-    std::ofstream outfile ("kdrama_List.txt");
+    std::ofstream outfile ("kdrama_List2.txt");
     
-    outfile << "Korean Drama Title                                                 " << "Status (Complete/Watching)                " << "Rating (1-10)" << std::endl; 
-    outfile << "________________________________________________________________________________________________________________________" << std::endl;
+    outfile << std::left << std::setw(30) << "Korean Drama Title " << std::left << std::setw(40) << "Status (Complete/Watching)" << std::left << std::setw(20)<< "Episode" << std::left << std::setw(20) << "Rating (1-10)" << std::endl; 
+    outfile << "________________________________________________________________________________________________________" << std::endl;
     for (int i=0;i<watchlist.size();i++){
-        outfile << watchlist[i].name << "                                                 " << watchlist[i].status << "                " << watchlist[i].rating << std::endl;
+        outfile << std::left << std::setw(30) << watchlist[i].name << std::left << std::setw(40) << watchlist[i].status << std::left << std::setw(20) << watchlist[i].episode << std::left << std::setw(10) << watchlist[i].rating << std::endl;
     }
     
     outfile.close();
     std::cout << std::endl;
 }
+     
+void kdrama::import_kdrama_list(){
+    std::string file_location;
+    std::cout << "Enter in file location of kdrama list to import: ";
+    std::getline(std::cin,file_location);
+    std::fstream in_file;
+    
+    in_file.open(file_location,std::ios::in);
+    
+    if(!in_file){
+        std::cerr << "Problem opening file" << std::endl;
+        return;
+    }
+    
+    in_file.close();
+    std::cout << "File imported and read" << std::endl;
+    
+}     
+     
      
 void kdrama::setRating(){
     double input;

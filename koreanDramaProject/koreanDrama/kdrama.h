@@ -27,6 +27,7 @@ public:
     void static print_list();
     bool check_if_exists_already(kdrama input_name);
     void static export_list();
+    void static import_kdrama_list();
     
     // setters and getters
     static kdrama& get_kdrama(int index);
