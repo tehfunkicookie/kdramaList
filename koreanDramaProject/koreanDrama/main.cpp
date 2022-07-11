@@ -94,6 +94,8 @@ int main (){
             default:
             
                 std::cout << "invalid selection." << std::endl;
+                std::cin.clear();
+                std::cin.ignore();
                 break;
         }
     
@@ -101,7 +103,6 @@ int main (){
         std::cout << "Do you want to return back to main menu (Y/N): ?" <<  std::endl;
         char c;
         std::cin >> c;
-        std::cin.ignore();
         
         if (c=='Y' || c =='y'){
             display_menu();
