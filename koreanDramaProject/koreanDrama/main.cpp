@@ -79,6 +79,7 @@ int main (){
                 
             case 5:
             {
+                std::cout << "Exporting file..." << std::endl;
                 kdrama::export_list();
                 std::cout << std::endl;
             }

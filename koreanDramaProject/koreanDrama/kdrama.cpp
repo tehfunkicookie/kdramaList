@@ -97,8 +97,11 @@ void kdrama::export_list(){
         return;
     }
     
+    // check if file exists already
+    
+    
     std::cout << "Outputting current kdrama list to text file..." << std::endl;
-    std::ofstream outfile ("kdrama_List2.txt");
+    std::ofstream outfile ("kdrama_List.txt");
     
     outfile << std::left << std::setw(30) << "Korean Drama Title " << std::left << std::setw(40) << "Status (Complete/Watching)" << std::left << std::setw(20)<< "Episode" << std::left << std::setw(20) << "Rating (1-10)" << std::endl; 
     outfile << "________________________________________________________________________________________________________" << std::endl;
@@ -112,16 +115,56 @@ void kdrama::export_list(){
      
 void kdrama::import_kdrama_list(){
     std::string file_location;
-    std::cout << "Enter in file location of kdrama list to import: ";
-    std::getline(std::cin,file_location);
-    std::fstream in_file;
-    
-    in_file.open(file_location,std::ios::in);
+//    std::cout << "Enter in file location of kdrama list to import: ";
+//    std::getline(std::cin,file_location);
+    std::ifstream in_file;
+    in_file.open("kdrama_List.txt");
+//    in_file.open(file_location,std::ios::in);
     
     if(!in_file){
         std::cerr << "Problem opening file" << std::endl;
         return;
+    } 
+    
+    // inputs read from file;
+    std::string kdrama_name;
+    std::string kdrama_status;
+    std::string kdrama_episode_string; // will convert to int later
+    std::string kdrama_rating_string; // will convert to double later
+    int kdrama_episode;
+    double kdrama_rating;
+    //
+    // skip the first two lines in the file since its just description of the rows
+    std::string line;
+    std::getline(in_file,line);
+    std::getline(in_file,line);
+    
+    while(std::getline(in_file,line)){
+        
+        // read in the kdrama name first..since the kdrama name can vary in length, use resize function to make sure the kdrama name will be dynamically changed by the software
+        kdrama_name = line.substr(0,30);
+        for (int i=kdrama_name.size()-1;i>=0;i--){
+            if (kdrama_name[i]==' '){
+                kdrama_name.pop_back();
+            } else{
+                break;
+            }
+        }
+        // read in the kdrama status next
+        kdrama_status = line.substr(30,8);
+        
+        // read in episode string 
+        kdrama_episode_string = line.substr(70,2);
+        kdrama_episode = stoi(kdrama_episode_string);        
+        
+        // reading in rating. assuming rating is up to 2 sig figs or one number after decimal point. so max of 3 chars can be read for rating
+        kdrama_rating_string = line.substr(90,3);
+        kdrama_rating = stod(kdrama_rating_string);
+        
+        kdrama input = kdrama(kdrama_name,kdrama_status,kdrama_rating,kdrama_episode);
+        kdrama::add_kdrama(input);           
     }
+    
     
     in_file.close();
     std::cout << "File imported and read" << std::endl;
