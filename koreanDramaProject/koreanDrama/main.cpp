@@ -36,7 +36,7 @@ int main (){
             case 2: //Rate a korean drama or change a rating
             {
                 int num_check = kdrama::find_kdrama();
-                std::cout << num_check << std::endl;
+//                std::cout << num_check << std::endl;
                 if(num_check){
 //                    kdrama::update_rating();
                     // use the index returned by find_kdrama and find it in the vector 
@@ -54,15 +54,9 @@ int main (){
             case 3:
             {
                 int num_check = kdrama::find_kdrama();
-                std::cout << num_check << std::endl;
+//                std::cout << num_check << std::endl;
                 if(num_check){
 //                    kdrama::update_rating();
-                    // use the index returned by find_kdrama and find it in the vector 
-                    // then call update_rating function 
-                    // i cannot call a non-static method from a static method
-                    // since i'm updating a korean drama rating, it has to be done from the object of the korean drama
-                    // i'm gonna have to write a function to return the kdrama i'm looking for
-                    // then store that return into a reference here in the main
                     kdrama& desired = kdrama::get_kdrama(num_check);
                     desired.setStatus();
                 }
@@ -96,7 +90,7 @@ int main (){
             
                 std::cout << "invalid selection." << std::endl;
                 std::cin.clear();
-                std::cin.ignore();
+//                std::cin.ignore();
                 break;
         }
     
